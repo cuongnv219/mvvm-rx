@@ -1,10 +1,6 @@
 # Mvvm-architecture-koin with rx
 
-[![](https://jitpack.io/v/cuongnv219/mvvm-rx.svg)](https://jitpack.io/#cuongnv219/mvvm-rx) [![Build Status]
-(https://travis-ci.org/cuongnv219/mvvm-rx.svg?branch=master)](https://travis-ci.org/cuongnv219/mvvm-rx) [![Codacy
-Badge](https://api.codacy.com/project/badge/Grade/76a3276b749e4be7bfb39c56314b11d3)](https://www.codacy
-.com/app/cuongnv219/mvvm-rx?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cuongnv219/mvvm-rx&amp;
-utm_campaign=Badge_Grade)
+[![](https://jitpack.io/v/cuongnv219/mvvm-rx.svg)](https://jitpack.io/#cuongnv219/mvvm-rx) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ac00a2f8cfe941bba44327f998bb6a29)](https://www.codacy.com/manual/cuongnv219/mvvm-rx?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cuongnv219/mvvm-rx&amp;utm_campaign=Badge_Grade)
 
 Sample base mvvm with rx
 This repository contains a detailed sample app that implements MVVM architecture using Koin, Room, RxJava, FastAndroidNetworking...
