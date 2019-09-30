@@ -1,0 +1,30 @@
+*.iml
+.gradle
+/local.properties
+.DS_Store
+/captures
+.externalNativeBuild
+
+# files for the dex VM
+# Java class files
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+# Android Studio
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+build/
+.navigation
+captures/
+#NDK
+Có thể gỡ bỏ libs/
+Có thể gỡ bỏ .gitignore
+Có thể gỡ bỏ build.gradle
+Có thể gỡ bỏ proguard-rules.pro
+Có thể gỡ bỏ src/
