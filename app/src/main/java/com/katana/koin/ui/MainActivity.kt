@@ -3,6 +3,7 @@ package com.katana.koin.ui
 import android.os.Bundle
 import com.core.BaseActivity
 import com.katana.koin.R
+import com.katana.koin.ui.home.HomeFragment
 import com.utils.ext.disposedBy
 import com.utils.ext.log
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,21 +21,37 @@ class MainActivity : BaseActivity() {
         mainViewModel.input.edtInput.receiveTextChangesFrom(edtInput)
         mainViewModel.input.save.receiveClicksFrom(btnSave)
 
-        mainViewModel.output.edtOutput.subscribe {
-            log(it)
-        }.disposedBy(bag)
+        addDispose(
+                mainViewModel.output.edtOutput.subscribe {
+                    log(it)
+                },
+                mainViewModel.output.showText.subscribe {
+                    log("huhu")
 
-        mainViewModel.output.showText.subscribe {
-            log("huhu")
+                    getUser()
+                },
+                mainViewModel.output.users.subscribe {
+                    log("hay lam")
+                }
+        )
+//        mainViewModel.output.edtOutput.subscribe {
+//            log(it)
+//        }.disposedBy(bag)
 
-            getUser()
-        }.disposedBy(bag)
+//        mainViewModel.output.showText.subscribe {
+//            log("huhu")
+//
+//            getUser()
+//        }.disposedBy(bag)
 
-        mainViewModel.output.users.subscribe {
-            log("hay lam")
-        }.disposedBy(bag)
+//        mainViewModel.output.users.subscribe {
+//            log("hay lam")
+//        }.disposedBy(bag)
 
-        getUser()
+//        getUser()
+
+        openFragment(R.id.content_home, HomeFragment::class.java, null, true)
+
     }
 
     private fun getUser() {

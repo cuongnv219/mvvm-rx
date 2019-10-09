@@ -13,9 +13,13 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.utils.DisposeBag
 import com.widget.Boast
+import io.reactivex.disposables.Disposable
 
 abstract class BaseDialog : DialogFragment() {
+
+    protected val bag by lazy { DisposeBag.create() }
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -42,6 +46,10 @@ abstract class BaseDialog : DialogFragment() {
         }
 
         return dialog
+    }
+
+    fun addDispose(vararg disposables: Disposable) {
+        bag.add(*disposables)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -99,5 +107,10 @@ abstract class BaseDialog : DialogFragment() {
         if (activity is BaseActivity) {
             (activity as BaseActivity).hideDialog()
         }
+    }
+
+    override fun onDestroy() {
+        bag.dispose()
+        super.onDestroy()
     }
 }

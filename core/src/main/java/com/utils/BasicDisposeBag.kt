@@ -22,6 +22,12 @@ class BasicDisposeBag : DisposeBag, Disposable {
         }
     }
 
+    override fun add(vararg disposables: Disposable) {
+        disposables.forEach {
+            add(it)
+        }
+    }
+
     override fun remove(disposable: Disposable) {
         synchronized(disposables) {
             disposables.cleanUp()

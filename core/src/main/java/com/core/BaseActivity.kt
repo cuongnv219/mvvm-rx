@@ -15,6 +15,7 @@ import com.utils.DisposeBag
 import com.utils.KeyboardUtils
 import com.utils.ext.disposedBy
 import com.widget.Boast
+import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.Subject
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -55,6 +56,10 @@ abstract class BaseActivity : AppCompatActivity() {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
+    fun addDispose(vararg disposables: Disposable) {
+        bag.add(*disposables)
+    }
+
     @Throws
     open fun openFragment(resId: Int, fragmentClazz: Class<*>, args: Bundle?, addBackStack: Boolean) {
         val tag = fragmentClazz.simpleName
@@ -78,7 +83,6 @@ abstract class BaseActivity : AppCompatActivity() {
                 } catch (e: IllegalAccessException) {
                     e.printStackTrace()
                 }
-
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -113,7 +117,6 @@ abstract class BaseActivity : AppCompatActivity() {
                 } catch (e: IllegalAccessException) {
                     e.printStackTrace()
                 }
-
             }
         } catch (e: Exception) {
             e.printStackTrace()

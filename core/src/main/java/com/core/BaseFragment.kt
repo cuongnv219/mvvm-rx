@@ -13,6 +13,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.utils.DisposeBag
 import com.utils.ext.disposedBy
 import com.widget.Boast
+import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.Subject
 
 abstract class BaseFragment : Fragment(),
@@ -34,6 +35,10 @@ abstract class BaseFragment : Fragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
+    }
+
+    fun addDispose(vararg disposables: Disposable) {
+        bag.add(*disposables)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
