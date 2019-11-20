@@ -10,7 +10,8 @@ import com.google.gson.Gson
 class AppPrefsHelper constructor(context: Context, prefsName: String, private val gson: Gson) : PrefsHelper {
 
     companion object {
-        const val KEY_USER                          = "KEY_USER"
+        const val KEY_USER = "KEY_USER"
+        const val KEY_COUNT = "KEY_COUNT"
     }
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
@@ -24,4 +25,10 @@ class AppPrefsHelper constructor(context: Context, prefsName: String, private va
     override fun getUser(): String? {
         return sharedPreferences.getString(KEY_USER, "")
     }
+
+    override var count: Int
+        get() = sharedPreferences.getInt(KEY_COUNT, 0)
+        set(count) {
+            sharedPreferences.edit().putInt(KEY_COUNT, count).apply()
+        }
 }

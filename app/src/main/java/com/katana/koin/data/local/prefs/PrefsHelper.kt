@@ -8,4 +8,6 @@ interface PrefsHelper {
     fun getUser(): String?
 
     fun saveUser(user: String)
+
+    var count: Int
 }

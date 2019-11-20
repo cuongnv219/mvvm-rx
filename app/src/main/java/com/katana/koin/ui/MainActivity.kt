@@ -4,7 +4,6 @@ import android.os.Bundle
 import com.core.BaseActivity
 import com.katana.koin.R
 import com.katana.koin.ui.home.HomeFragment
-import com.utils.ext.disposedBy
 import com.utils.ext.log
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -28,11 +27,12 @@ class MainActivity : BaseActivity() {
                 mainViewModel.output.showText.subscribe {
                     log("huhu")
 
-                    getUser()
+//                    getUser()
                 },
                 mainViewModel.output.users.subscribe {
                     log("hay lam")
                 }
+//                mainViewModel.getUserGithub()
         )
 //        mainViewModel.output.edtOutput.subscribe {
 //            log(it)
@@ -55,7 +55,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun getUser() {
-        mainViewModel.getUserGithub().disposedBy(bag)
+        addDispose(
+                mainViewModel.getUserGithub()
+        )
+//        mainViewModel.getUserGithub().disposedBy(bag)
     }
 
     override fun onStart() {

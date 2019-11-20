@@ -31,7 +31,7 @@ public final class CommonUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             return new String(buffer, StandardCharsets.UTF_8);
         } else {
-            return new String(buffer, "UTF-8");
+            return new String(buffer, StandardCharsets.UTF_8);
         }
     }
 }

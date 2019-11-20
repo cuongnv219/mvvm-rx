@@ -1,3 +1,5 @@
+@file:Suppress("Unused")
+
 package com.utils.ext
 
 import android.os.Build
@@ -31,26 +33,26 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by Kaz on 14:13 8/27/18
  */
-fun ViewGroup.inflateExt(layoutId: Int) = LayoutInflater.from(context).inflate(layoutId, this, false)
+fun ViewGroup.inflateExt(layoutId: Int): View = LayoutInflater.from(context).inflate(layoutId, this, false)
 
 fun View.clickWithDebounce(debounceTime: Long = 600L, action: (view: View) -> Unit): Disposable =
         RxView.clicks(this)
                 .throttleFirst(debounceTime, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
                 .subscribe { action(this) }
 
-inline fun <reified T> Gson.toList(json: String) =
+inline fun <reified T> Gson.toList(json: String): List<T> =
         fromJson<List<T>>(
                 json,
                 ListOfSomething<T>(T::class.java)
         )
 
-inline fun <reified T> Gson.toList(jsonArr: JsonArray) =
+inline fun <reified T> Gson.toList(jsonArr: JsonArray): List<T> =
         fromJson<List<T>>(
                 jsonArr,
                 ListOfSomething<T>(T::class.java)
         )
 
-inline fun <reified T> Gson.toList(jsonObject: JsonObject) =
+inline fun <reified T> Gson.toList(jsonObject: JsonObject): List<T> =
         fromJson<List<T>>(
                 jsonObject,
                 ListOfSomething<T>(T::class.java)

@@ -13,4 +13,6 @@ class AppDataManager constructor(private val prefsHelper: PrefsHelper, private v
     override fun saveUser(user: String) = prefsHelper.saveUser(user)
 
     override fun getUserGitHub() = apiHelper.getUserGitHub()
+
+    override var count: Int = prefsHelper.count
 }

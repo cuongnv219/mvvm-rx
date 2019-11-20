@@ -52,4 +52,6 @@ class MainViewModel(
                     }, {
                         it.printStackTrace()
                     })
+
+//    fun getUser() = dataManager.getUser()
 }
