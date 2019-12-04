@@ -30,9 +30,6 @@ import org.greenrobot.eventbus.EventBus
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-/**
- * Created by Kaz on 14:13 8/27/18
- */
 fun ViewGroup.inflateExt(layoutId: Int): View = LayoutInflater.from(context).inflate(layoutId, this, false)
 
 fun View.clickWithDebounce(debounceTime: Long = 600L, action: (view: View) -> Unit): Disposable =
