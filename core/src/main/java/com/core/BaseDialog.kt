@@ -12,6 +12,7 @@ import android.widget.RelativeLayout
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.utils.DisposeBag
 import com.widget.Boast
@@ -32,7 +33,7 @@ abstract class BaseDialog : DialogFragment() {
         val root = RelativeLayout(activity)
         root.layoutParams =
                 ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        val dialog = Dialog(activity)
+        val dialog = Dialog(activity as FragmentActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(root)
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.core.BaseActivity
 import com.katana.koin.R
 import com.katana.koin.ui.home.HomeFragment
+import com.utils.applyClickShrink
 import com.utils.ext.log
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -51,7 +52,7 @@ class MainActivity : BaseActivity() {
 //        getUser()
 
         openFragment(R.id.content_home, HomeFragment::class.java, null, true)
-
+        btnSave.applyClickShrink()
     }
 
     private fun getUser() {
