@@ -8,37 +8,20 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-interface MainInput {
-    val edtInput: BehaviorSubject<String>
-    var save: PublishSubject<Unit>
-}
-
-interface MainOutput {
-    val showText: Observable<Unit>
-    val edtOutput: Observable<String>
-    val users: Observable<JsonArray>
-}
-
 class MainViewModel(
         dataManager: DataManager,
         schedulerProvider: SchedulerProvider
-) : BaseViewModel<MainInput, MainOutput, DataManager>(dataManager, schedulerProvider), MainInput, MainOutput {
+) : BaseViewModel<DataManager>(dataManager, schedulerProvider) {
 
-    override val users: PublishSubject<JsonArray> = PublishSubject.create()
+    val users: PublishSubject<JsonArray> = PublishSubject.create()
 
-    override val edtInput = BehaviorSubject.createDefault("")
+    val edtInput = BehaviorSubject.createDefault("")
 
-    override var save = PublishSubject.create<Unit>()
+    var save = PublishSubject.create<Unit>()
 
-    override val showText: Observable<Unit> = save.onErrorReturn { }
+    val showText: Observable<Unit> = save.onErrorReturn { }
 
-    override val edtOutput: Observable<String> = edtInput
-
-    override val input: MainInput
-        get() = this
-
-    override val output: MainOutput
-        get() = this
+    val edtOutput: Observable<String> = edtInput
 
     fun saveUser(user: String) = dataManager.saveUser("Ahihi")
 

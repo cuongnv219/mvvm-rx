@@ -18,19 +18,19 @@ class MainActivity : BaseActivity() {
     override fun updateUI(savedInstanceState: Bundle?) {
 
         //input
-        mainViewModel.input.edtInput.receiveTextChangesFrom(edtInput)
-        mainViewModel.input.save.receiveClicksFrom(btnSave)
+        mainViewModel.edtInput.receiveTextChangesFrom(edtInput)
+        mainViewModel.save.receiveClicksFrom(btnSave)
 
         addDispose(
-                mainViewModel.output.edtOutput.subscribe {
+                mainViewModel.edtOutput.subscribe {
                     log(it)
                 },
-                mainViewModel.output.showText.subscribe {
+                mainViewModel.showText.subscribe {
                     log("huhu")
 
 //                    getUser()
                 },
-                mainViewModel.output.users.subscribe {
+                mainViewModel.users.subscribe {
                     log("hay lam")
                 }
 //                mainViewModel.getUserGithub()
