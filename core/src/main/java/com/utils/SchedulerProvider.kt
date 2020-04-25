@@ -31,7 +31,7 @@ class SchedulerProvider {
                 .observeOn(getMainThreadScheduler())
     }
 
-    private fun getIOThreadScheduler() = Schedulers.io()
+    fun getIOThreadScheduler() = Schedulers.io()
 
-    private fun getMainThreadScheduler() = AndroidSchedulers.mainThread()
+    fun getMainThreadScheduler() = AndroidSchedulers.mainThread()
 }

@@ -2,10 +2,10 @@ package io.rmiri.skeleton.sample.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import io.rmiri.skeleton.sample.R;
 import io.rmiri.skeleton.sample.activity.java.addViewsByJava.AddViewsByJavaActivity;
 import io.rmiri.skeleton.sample.activity.java.gradientJava.GradientJavaActivity;
@@ -14,7 +14,6 @@ import io.rmiri.skeleton.sample.activity.xml.fade1Xml.Fade1XmlActivity;
 import io.rmiri.skeleton.sample.activity.xml.fade2Xml.FadeXml2Activity;
 import io.rmiri.skeleton.sample.activity.xml.gradientXml.GradientXmlActivity;
 import io.rmiri.skeleton.sample.activity.xml.shapeXml.ShapeXmlActivity;
-
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

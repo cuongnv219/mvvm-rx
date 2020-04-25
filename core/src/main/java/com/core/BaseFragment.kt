@@ -1,5 +1,3 @@
-@file:Suppress("UNCHECKED_CAST")
-
 package com.core
 
 import android.os.Bundle
@@ -109,7 +107,7 @@ abstract class BaseFragment : Fragment(),
             if (!isExisted) {
                 val fragment: Fragment
                 try {
-                    fragment = (fragmentClazz as Class<Fragment>).newInstance().apply { arguments = args }
+                    fragment = (fragmentClazz.asSubclass(Fragment::class.java)).newInstance().apply { arguments = args }
 
                     val transaction = childFragmentManager.beginTransaction()
                     //transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
@@ -143,7 +141,7 @@ abstract class BaseFragment : Fragment(),
             if (!isExisted) {
                 val fragment: Fragment
                 try {
-                    fragment = (fragmentClazz as Class<Fragment>).newInstance().apply { arguments = args }
+                    fragment = (fragmentClazz.asSubclass(Fragment::class.java)).newInstance().apply { arguments = args }
 
                     val transaction = childFragmentManager.beginTransaction()
                     transaction.setCustomAnimations(aniInt[0], aniInt[1], aniInt[2], aniInt[3])

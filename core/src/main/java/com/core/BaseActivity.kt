@@ -68,7 +68,7 @@ abstract class BaseActivity : AppCompatActivity() {
             if (!isExisted) {
                 val fragment: Fragment
                 try {
-                    fragment = (fragmentClazz as Class<Fragment>).newInstance().apply { arguments = args }
+                    fragment = (fragmentClazz.asSubclass(Fragment::class.java)).newInstance().apply { arguments = args }
 
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.add(resId, fragment, tag)
@@ -100,7 +100,7 @@ abstract class BaseActivity : AppCompatActivity() {
             if (!isExisted) {
                 val fragment: Fragment
                 try {
-                    fragment = (fragmentClazz as Class<Fragment>).newInstance().apply { arguments = args }
+                    fragment = (fragmentClazz.asSubclass(Fragment::class.java)).newInstance().apply { arguments = args }
 
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.setCustomAnimations(aniInt[0], aniInt[1], aniInt[2], aniInt[3])
