@@ -100,7 +100,7 @@ public class FadeXml1Adapter extends AdapterSkeleton<DataObject, FadeXml1Adapter
         }
 
         // Set photo by Picasso lib
-        Picasso.with(context).load(cardObj.getPhoto()).into(holder.photoACImgV);
+        Picasso.get().load(cardObj.getPhoto()).into(holder.photoACImgV);
 
 
     }

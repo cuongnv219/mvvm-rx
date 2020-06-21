@@ -1,6 +1,5 @@
 package com.core
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -17,7 +16,6 @@ import com.utils.ext.disposedBy
 import com.widget.Boast
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.Subject
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -52,9 +50,9 @@ abstract class BaseActivity : AppCompatActivity() {
         updateUI(savedInstanceState)
     }
 
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
-    }
+//    override fun attachBaseContext(newBase: Context) {
+//        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
+//    }
 
     fun addDispose(vararg disposables: Disposable) {
         bag.add(*disposables)
@@ -281,5 +279,19 @@ abstract class BaseActivity : AppCompatActivity() {
         RxView.clicks(view)
                 .subscribe { this.onNext(Unit) }
                 .disposedBy(bag)
+    }
+
+    protected fun isCurrentFragment(java: Class<*>, containerId: Int): Boolean {
+        val curr = supportFragmentManager.findFragmentById(containerId) ?: return false
+        return curr::class.java == java
+    }
+
+    protected fun isCurrentFragment(java: Class<*>, tagZ: String = "", containerId: Int): Boolean {
+        val curr = if (tagZ.isEmpty()) {
+            supportFragmentManager.findFragmentById(containerId) ?: return false
+        } else {
+            supportFragmentManager.findFragmentByTag(java::class.java.simpleName + tagZ) ?: return false
+        }
+        return curr::class.java == java
     }
 }

@@ -35,21 +35,6 @@ class MainActivity : BaseActivity() {
                 }
 //                mainViewModel.getUserGithub()
         )
-//        mainViewModel.output.edtOutput.subscribe {
-//            log(it)
-//        }.disposedBy(bag)
-
-//        mainViewModel.output.showText.subscribe {
-//            log("huhu")
-//
-//            getUser()
-//        }.disposedBy(bag)
-
-//        mainViewModel.output.users.subscribe {
-//            log("hay lam")
-//        }.disposedBy(bag)
-
-//        getUser()
 
         openFragment(R.id.content_home, HomeFragment::class.java, null, true)
         btnSave.applyClickShrink()
@@ -60,30 +45,5 @@ class MainActivity : BaseActivity() {
                 mainViewModel.getUserGithub()
         )
 //        mainViewModel.getUserGithub().disposedBy(bag)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        log("onStart")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        log("onPause")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        log("onResume")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        log("onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        log("onDestroy")
     }
 }

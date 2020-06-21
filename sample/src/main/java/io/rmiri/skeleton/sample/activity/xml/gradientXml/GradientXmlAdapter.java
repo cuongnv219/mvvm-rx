@@ -35,7 +35,6 @@ public class GradientXmlAdapter extends AdapterSkeleton<DataObject, GradientXmlA
     }
 
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gradient_xml, parent, false);
@@ -99,10 +98,6 @@ public class GradientXmlAdapter extends AdapterSkeleton<DataObject, GradientXmlA
         }
 
         // Set photo by Picasso lib
-        Picasso.with(context).load(cardObj.getPhoto()).into(holder.photoACImgV);
-
+        Picasso.get().load(cardObj.getPhoto()).into(holder.photoACImgV);
     }
-
-
-
 }

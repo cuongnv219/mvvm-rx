@@ -7,12 +7,4 @@
     android:padding="32dp"
     tools:context=".ui.home.HomeFragment">
 
-
-  <ProgressBar
-      android:id="@+id/vertical_progressbar"
-      style="@style/Widget.ProgressBar.Vertical"
-      android:layout_width="20dp"
-      android:layout_gravity="center"
-      android:layout_height="300dip"
-      android:progress="75" />
 </LinearLayout>
