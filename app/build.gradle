@@ -26,6 +26,10 @@ android {
         abortOnError false
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     android {
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8

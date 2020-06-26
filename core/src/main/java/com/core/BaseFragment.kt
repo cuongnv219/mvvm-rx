@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.*
 import android.widget.EditText
 import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding2.view.RxView
@@ -14,8 +16,9 @@ import com.widget.Boast
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.Subject
 
-abstract class BaseFragment : Fragment(),
-        ViewTreeObserver.OnGlobalLayoutListener {
+abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.OnGlobalLayoutListener {
+
+    protected var binding: V? = null
 
     private var rootView: View? = null
 
@@ -42,12 +45,19 @@ abstract class BaseFragment : Fragment(),
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layoutId = getLayoutId()
         if (rootView != null) {
+            //todo fix something
             val parent = rootView!!.parent as ViewGroup?
             parent?.removeView(rootView)
         } else {
             try {
-                rootView = inflater.inflate(layoutId, container, false)
+                binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+                rootView = if (binding != null) {
+                    binding!!.root
+                } else {
+                    inflater.inflate(layoutId, container, false)
+                }
                 rootView!!.viewTreeObserver.addOnGlobalLayoutListener(this)
+//                updateUI(savedInstanceState)
             } catch (e: InflateException) {
                 e.printStackTrace()
             }
@@ -57,7 +67,12 @@ abstract class BaseFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateUI(savedInstanceState)
+//        hideKeyboardOutSideText(view)
+        view.isClickable = true
+        view.isFocusable = true
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
     }
 
     override fun onDestroy() {
@@ -179,7 +194,7 @@ abstract class BaseFragment : Fragment(),
 
     fun showDialog() {
         activity?.let {
-            if (it is BaseActivity) {
+            if (it is BaseActivity<*>) {
                 it.showDialog()
             }
         }
@@ -187,7 +202,7 @@ abstract class BaseFragment : Fragment(),
 
     fun hideDialog() {
         activity?.let {
-            if (it is BaseActivity) {
+            if (it is BaseActivity<*>) {
                 it.hideDialog()
             }
         }
@@ -195,7 +210,7 @@ abstract class BaseFragment : Fragment(),
 
     fun hideKeyboard() {
         activity?.let {
-            if (it is BaseActivity) {
+            if (it is BaseActivity<*>) {
                 it.hideKeyboard()
             }
         }
@@ -203,7 +218,7 @@ abstract class BaseFragment : Fragment(),
 
     fun hideKeyboardOutSide(view: View) {
         activity?.let {
-            if (it is BaseActivity) {
+            if (it is BaseActivity<*>) {
                 it.hideKeyboardOutSide(view)
             }
         }
@@ -211,7 +226,7 @@ abstract class BaseFragment : Fragment(),
 
     fun hideKeyboardOutSideText(view: View) {
         activity?.let {
-            if (it is BaseActivity) {
+            if (it is BaseActivity<*>) {
                 it.hideKeyboardOutSideText(view)
             }
         }
@@ -223,7 +238,7 @@ abstract class BaseFragment : Fragment(),
 
     open fun clearAllBackStack() {
         activity?.let {
-            if (it is BaseActivity) {
+            if (it is BaseActivity<*>) {
                 it.clearAllBackStack()
             }
         }

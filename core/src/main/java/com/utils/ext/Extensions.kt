@@ -133,11 +133,11 @@ fun String.capitalizedWord(): String {
     return aString
 }
 
-fun BaseActivity.log(msg: String?) {
+fun BaseActivity<*>.log(msg: String?) {
     LogUtil.error(this::class.java.simpleName, msg.toString())
 }
 
-fun BaseFragment.log(msg: String?) {
+fun BaseFragment<*>.log(msg: String?) {
     LogUtil.error(this::class.java.simpleName, msg.toString())
 }
 

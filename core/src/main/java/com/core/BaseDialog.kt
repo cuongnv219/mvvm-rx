@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.RelativeLayout
 import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -18,7 +20,9 @@ import com.utils.DisposeBag
 import com.widget.Boast
 import io.reactivex.disposables.Disposable
 
-abstract class BaseDialog : DialogFragment() {
+abstract class BaseDialog<V : ViewDataBinding> : DialogFragment() {
+
+    lateinit var binding: V
 
     protected val bag by lazy { DisposeBag.create() }
 
@@ -53,8 +57,12 @@ abstract class BaseDialog : DialogFragment() {
         bag.add(*disposables)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(getLayoutId(), container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        return inflater.inflate(getLayoutId(), container, false)
+        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
+        binding.executePendingBindings()
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -99,14 +107,14 @@ abstract class BaseDialog : DialogFragment() {
     }
 
     fun showDialog() {
-        if (activity is BaseActivity) {
-            (activity as BaseActivity).showDialog()
+        if (activity is BaseActivity<*>) {
+            (activity as BaseActivity<*>).showDialog()
         }
     }
 
     fun hideDialog() {
-        if (activity is BaseActivity) {
-            (activity as BaseActivity).hideDialog()
+        if (activity is BaseActivity<*>) {
+            (activity as BaseActivity<*>).hideDialog()
         }
     }
 

@@ -6,6 +6,8 @@ import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding2.view.RxView
@@ -17,10 +19,12 @@ import com.widget.Boast
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.Subject
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
 
     lateinit var loading: AlertDialog
     lateinit var loading2: AlertDialog
+
+    lateinit var binding: V
 
     private var isCancelable = false
     private var isCancelable2 = false
@@ -44,7 +48,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
+//        setContentView(getLayoutId())
+        binding = DataBindingUtil.setContentView(this, getLayoutId())
         initDialog()
         initDialog2()
         updateUI(savedInstanceState)
