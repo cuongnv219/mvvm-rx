@@ -39,8 +39,6 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
 
     open fun getThemResId(): Int = -1
 
-    protected abstract fun updateUI(savedInstanceState: Bundle?)
-
     override fun onDestroy() {
         bag.dispose()
         super.onDestroy()
@@ -48,16 +46,10 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(getLayoutId())
         binding = DataBindingUtil.setContentView(this, getLayoutId())
         initDialog()
         initDialog2()
-        updateUI(savedInstanceState)
     }
-
-//    override fun attachBaseContext(newBase: Context) {
-//        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
-//    }
 
     fun addDispose(vararg disposables: Disposable) {
         bag.add(*disposables)

@@ -27,8 +27,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
     @LayoutRes
     abstract fun getLayoutId(): Int
 
-    protected abstract fun updateUI(savedInstanceState: Bundle?)
-
     override fun onGlobalLayout() {
         rootView!!.viewTreeObserver.removeOnGlobalLayoutListener(this)
     }
