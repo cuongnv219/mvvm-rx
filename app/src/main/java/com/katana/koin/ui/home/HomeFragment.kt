@@ -13,7 +13,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun getLayoutId(): Int = R.layout.fragment_home
 
-    override fun updateUI(savedInstanceState: Bundle?) {
+    fun updateUI(savedInstanceState: Bundle?) {
 
     }
 }

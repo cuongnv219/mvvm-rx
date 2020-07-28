@@ -16,7 +16,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
-    override fun updateUI(savedInstanceState: Bundle?) {
+
+    fun updateUI(savedInstanceState: Bundle?) {
 
         //input
         mainViewModel.edtInput.receiveTextChangesFrom(edtInput)
