@@ -35,7 +35,7 @@ abstract class BaseCustomLayout : RelativeLayout {
 
     private fun initAttr(attr: AttributeSet) {
         getStyleableId()?.let {
-            val a = context.theme.obtainStyledAttributes(attr, getStyleableId(), 0, 0)
+            val a = context.theme.obtainStyledAttributes(attr, getStyleableId() ?: return, 0, 0)
             try {
                 initDataFromStyleable(a)
             } catch (e: Exception) {
@@ -53,10 +53,11 @@ abstract class BaseCustomLayout : RelativeLayout {
     }
 
     fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView, adapter:
+            rcv: RecyclerView,
+            adapter:
             RecyclerView.Adapter<VH>,
             isHasFixedSize: Boolean,
-            isNestedScrollingEnabled: Boolean
+            isNestedScrollingEnabled: Boolean,
     ) {
         rcv.setHasFixedSize(isHasFixedSize)
         rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
@@ -65,9 +66,10 @@ abstract class BaseCustomLayout : RelativeLayout {
     }
 
     fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView, adapter:
+            rcv: RecyclerView,
+            adapter:
             RecyclerView.Adapter<VH>,
-            isNestedScrollingEnabled: Boolean
+            isNestedScrollingEnabled: Boolean,
     ) {
         rcv.setHasFixedSize(true)
         rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)

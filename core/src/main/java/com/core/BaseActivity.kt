@@ -2,7 +2,6 @@ package com.core
 
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -10,14 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.jakewharton.rxbinding2.view.RxView
-import com.jakewharton.rxbinding2.widget.RxTextView
 import com.utils.DisposeBag
 import com.utils.KeyboardUtils
-import com.utils.ext.disposedBy
 import com.widget.Boast
-import io.reactivex.disposables.Disposable
-import io.reactivex.subjects.Subject
+import io.reactivex.rxjava3.disposables.Disposable
 
 abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
 
@@ -87,7 +82,7 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
     @Throws
     open fun openFragment(
             resId: Int, fragmentClazz: Class<*>, args: Bundle?, addBackStack: Boolean,
-            vararg aniInt: Int
+            vararg aniInt: Int,
     ) {
         val tag = fragmentClazz.simpleName
         try {
@@ -237,10 +232,11 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
     }
 
     fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView, adapter:
+            rcv: RecyclerView,
+            adapter:
             RecyclerView.Adapter<VH>,
             isHasFixedSize: Boolean,
-            isNestedScrollingEnabled: Boolean
+            isNestedScrollingEnabled: Boolean,
     ) {
         rcv.setHasFixedSize(isHasFixedSize)
         rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
@@ -249,9 +245,10 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
     }
 
     fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView, adapter:
+            rcv: RecyclerView,
+            adapter:
             RecyclerView.Adapter<VH>,
-            isNestedScrollingEnabled: Boolean
+            isNestedScrollingEnabled: Boolean,
     ) {
         rcv.setHasFixedSize(true)
         rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
@@ -266,17 +263,17 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
-    fun Subject<String>.receiveTextChangesFrom(editText: EditText) {
-        RxTextView.textChanges(editText)
-                .subscribe { newText -> this.onNext(newText.toString()) }
-                .disposedBy(bag)
-    }
-
-    fun Subject<Unit>.receiveClicksFrom(view: View) {
-        RxView.clicks(view)
-                .subscribe { this.onNext(Unit) }
-                .disposedBy(bag)
-    }
+//    fun Subject<String>.receiveTextChangesFrom(editText: EditText) {
+//        RxTextView.textChanges(editText)
+//                .subscribe { newText -> this.onNext(newText.toString()) }
+//                .disposedBy(bag)
+//    }
+//
+//    fun Subject<Unit>.receiveClicksFrom(view: View) {
+//        RxView.clicks(view)
+//                .subscribe { this.onNext(Unit) }
+//                .disposedBy(bag)
+//    }
 
     protected fun isCurrentFragment(java: Class<*>, containerId: Int): Boolean {
         val curr = supportFragmentManager.findFragmentById(containerId) ?: return false

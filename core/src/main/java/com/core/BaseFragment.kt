@@ -2,23 +2,18 @@ package com.core
 
 import android.os.Bundle
 import android.view.*
-import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.jakewharton.rxbinding2.view.RxView
-import com.jakewharton.rxbinding2.widget.RxTextView
 import com.utils.DisposeBag
-import com.utils.ext.disposedBy
 import com.widget.Boast
-import io.reactivex.disposables.Disposable
-import io.reactivex.subjects.Subject
+import io.reactivex.rxjava3.disposables.Disposable
 
 abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.OnGlobalLayoutListener {
 
-    protected var binding: V? = null
+    protected lateinit var binding: V
 
     private var rootView: View? = null
 
@@ -49,11 +44,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
         } else {
             try {
                 binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-                rootView = if (binding != null) {
-                    binding!!.root
-                } else {
-                    inflater.inflate(layoutId, container, false)
-                }
+                rootView = binding!!.root
                 rootView!!.viewTreeObserver.addOnGlobalLayoutListener(this)
 //                updateUI(savedInstanceState)
             } catch (e: InflateException) {
@@ -85,10 +76,11 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
     }
 
     fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView, adapter:
+            rcv: RecyclerView,
+            adapter:
             RecyclerView.Adapter<VH>,
             isHasFixedSize: Boolean,
-            isNestedScrollingEnabled: Boolean
+            isNestedScrollingEnabled: Boolean,
     ) {
         rcv.setHasFixedSize(isHasFixedSize)
         rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
@@ -97,9 +89,10 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
     }
 
     fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView, adapter:
+            rcv: RecyclerView,
+            adapter:
             RecyclerView.Adapter<VH>,
-            isNestedScrollingEnabled: Boolean
+            isNestedScrollingEnabled: Boolean,
     ) {
         rcv.setHasFixedSize(true)
         rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
@@ -112,7 +105,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
             resId: Int,
             fragmentClazz: Class<*>,
             args: Bundle?,
-            addBackStack: Boolean
+            addBackStack: Boolean,
     ) {
         val tag = fragmentClazz.simpleName
         try {
@@ -146,7 +139,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
     @Throws
     open fun openFragment(
             resId: Int, fragmentClazz: Class<*>, args: Bundle?, addBackStack: Boolean,
-            vararg aniInt: Int
+            vararg aniInt: Int,
     ) {
         val tag = fragmentClazz.simpleName
         try {
@@ -246,15 +239,15 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
         activity?.finish()
     }
 
-    fun Subject<String>.receiveTextChangesFrom(editText: EditText) {
-        RxTextView.textChanges(editText)
-                .subscribe { newText -> this.onNext(newText.toString()) }
-                .disposedBy(bag)
-    }
-
-    fun Subject<Unit>.receiveClicksFrom(view: View) {
-        RxView.clicks(view)
-                .subscribe { this.onNext(Unit) }
-                .disposedBy(bag)
-    }
+//    fun Subject<String>.receiveTextChangesFrom(editText: EditText) {
+//        RxTextView.textChanges(editText)
+//                .subscribe { newText -> this.onNext(newText.toString()) }
+//                .disposedBy(bag)
+//    }
+//
+//    fun Subject<Unit>.receiveClicksFrom(view: View) {
+//        RxView.clicks(view)
+//                .subscribe { this.onNext(Unit) }
+//                .disposedBy(bag)
+//    }
 }

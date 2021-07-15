@@ -67,7 +67,6 @@ fun View.invisible() {
     this.visibility = View.INVISIBLE
 }
 
-fun View.isVisible() = visibility == View.VISIBLE
 
 fun View.setVisibility(isVisible: Boolean) {
     visibility = if (isVisible) View.VISIBLE else View.GONE

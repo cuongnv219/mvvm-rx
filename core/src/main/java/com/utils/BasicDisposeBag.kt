@@ -1,7 +1,7 @@
 package com.utils
 
 import android.util.Log
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.disposables.Disposable
 import java.lang.ref.WeakReference
 
 class BasicDisposeBag : DisposeBag, Disposable {

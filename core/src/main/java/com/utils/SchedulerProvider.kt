@@ -1,8 +1,8 @@
 package com.utils
 
-import io.reactivex.*
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class SchedulerProvider {
 
@@ -14,6 +14,10 @@ class SchedulerProvider {
     fun <T> ioToMainSingleScheduler(): SingleTransformer<T, T> = SingleTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
+    }
+    fun <T> ioToIOSingleScheduler(): SingleTransformer<T, T> = SingleTransformer { upstream ->
+        upstream.subscribeOn(getIOThreadScheduler())
+                .observeOn(getIOThreadScheduler())
     }
 
     fun ioToMainCompletableScheduler(): CompletableTransformer = CompletableTransformer { upstream ->

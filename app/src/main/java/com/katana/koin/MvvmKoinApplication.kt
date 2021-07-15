@@ -1,8 +1,6 @@
 package com.katana.koin
 
 import android.app.Application
-import com.androidnetworking.AndroidNetworking
-import com.androidnetworking.interceptors.HttpLoggingInterceptor
 import com.katana.koin.di.mvvmModule
 import com.utils.LogUtil
 import okhttp3.CipherSuite
@@ -31,6 +29,7 @@ class MvvmKoinApplication : Application() {
         }
         initFastNetworking()
     }
+
     private fun initFastNetworking() {
         val spec = ConnectionSpec.Builder(ConnectionSpec.COMPATIBLE_TLS)
                 .supportsTlsExtensions(true)
@@ -70,10 +69,10 @@ class MvvmKoinApplication : Application() {
                 .readTimeout(30, TimeUnit.SECONDS)
                 .build()
 
-        AndroidNetworking.initialize(this, okHttpClient)
-        if (BuildConfig.DEBUG) {
-            AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY)
-        }
+//        AndroidNetworking.initialize(this, okHttpClient)
+//        if (BuildConfig.DEBUG) {
+//            AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY)
+//        }
     }
 
 }

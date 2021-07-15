@@ -1,9 +1,9 @@
 package com.utils.ext
 
 import com.utils.DisposeBag
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.toObservable
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.toObservable
 
 fun <G : Iterable<T>, T : Any, U : Any> Observable<G>.mapIterable(block: (T) -> U)
         : Observable<List<U>> {
@@ -29,7 +29,7 @@ fun <T : Any, U : Any> Observable<T>.mapNotNull(block: (T) -> U?): Observable<U>
         .filterNotNull()
 
 
-fun <T> Observable<T>.onErrorComplete(): Observable<T> = this.onErrorResumeNext(Observable.empty())
+//fun <T> Observable<T>.onErrorComplete(): Observable<T> = this.onErrorResumeNext(Obser.empty())
 
 fun <T : Disposable> T.disposedBy(disposeBag: DisposeBag): T {
     disposeBag.add(this)

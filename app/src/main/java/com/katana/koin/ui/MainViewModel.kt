@@ -1,6 +1,5 @@
 package com.katana.koin.ui
 
-import com.core.BaseViewModel
 import com.google.gson.JsonArray
 import com.katana.koin.data.DataManager
 import com.utils.SchedulerProvider
@@ -10,8 +9,8 @@ import io.reactivex.subjects.PublishSubject
 
 class MainViewModel(
         dataManager: DataManager,
-        schedulerProvider: SchedulerProvider
-) : BaseViewModel<DataManager>(dataManager, schedulerProvider) {
+        schedulerProvider: SchedulerProvider,
+) : BaseAppViewModel(dataManager, schedulerProvider) {
 
     val users: PublishSubject<JsonArray> = PublishSubject.create()
 

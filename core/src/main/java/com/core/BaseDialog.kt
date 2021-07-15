@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.utils.DisposeBag
 import com.widget.Boast
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.disposables.Disposable
 
 abstract class BaseDialog<V : ViewDataBinding> : DialogFragment() {
 

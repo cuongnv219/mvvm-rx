@@ -160,7 +160,7 @@ object AndroidVersion {
 
     fun isIntentAvailable(context: Context, intent: Intent?): Boolean {
         val packageManager = context.packageManager
-        val list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+        val list = packageManager.queryIntentActivities(intent ?: return false, PackageManager.MATCH_DEFAULT_ONLY)
         return list.size > 0
     }
 
@@ -170,7 +170,7 @@ object AndroidVersion {
     }
 
     fun hasFeature(context: Context, feature: String?): Boolean {
-        return context.packageManager.hasSystemFeature(feature)
+        return context.packageManager.hasSystemFeature(feature ?: return false)
     }
 
     fun hasLeanback(context: Context): Boolean {

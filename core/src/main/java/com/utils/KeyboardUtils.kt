@@ -27,7 +27,7 @@ object KeyboardUtils {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
 
-    private fun hideSoftKeyboard(activity: Activity) {
+    fun hideSoftKeyboard(activity: Activity) {
         val inputMethodManager = activity.getSystemService(
                 Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         activity.currentFocus?.let {

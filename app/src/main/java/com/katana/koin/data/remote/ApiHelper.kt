@@ -1,7 +1,7 @@
 package com.katana.koin.data.remote
 
 import com.google.gson.JsonArray
-import io.reactivex.Single
+import io.reactivex.rxjava3.core.Single
 
 interface ApiHelper {
 

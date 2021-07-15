@@ -48,7 +48,7 @@ class RoundRectCornerImageView : AppCompatImageView {
         }
 
         path?.let {
-            it.addRoundRect(rect, radius, radius, Path.Direction.CW)
+            it.addRoundRect(rect!!, radius, radius, Path.Direction.CW)
             canvas.clipPath(it)
         }
         super.onDraw(canvas)
