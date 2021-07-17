@@ -21,21 +21,17 @@ import com.core.BaseFragment
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.jakewharton.rxbinding2.view.RxView
 import com.utils.ListOfSomething
 import com.utils.LogUtil
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import org.greenrobot.eventbus.EventBus
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 fun ViewGroup.inflateExt(layoutId: Int): View = LayoutInflater.from(context).inflate(layoutId, this, false)
 
-fun View.clickWithDebounce(debounceTime: Long = 600L, action: (view: View) -> Unit): Disposable =
-        RxView.clicks(this)
-                .throttleFirst(debounceTime, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
-                .subscribe { action(this) }
+//fun View.clickWithDebounce(debounceTime: Long = 600L, action: (view: View) -> Unit): Disposable =
+//        RxView.clicks(this)
+//                .throttleFirst(debounceTime, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+//                .subscribe { action(this) }
 
 inline fun <reified T> Gson.toList(json: String): List<T> =
         fromJson<List<T>>(
