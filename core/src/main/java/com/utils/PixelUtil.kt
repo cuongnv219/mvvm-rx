@@ -2,15 +2,16 @@ package com.utils
 
 import android.content.Context
 import android.util.DisplayMetrics
+import kotlin.math.roundToInt
 
 object PixelUtil {
 
     fun dpToPx(context: Context, dp: Int): Int {
-        return Math.round(dp * getPixelScaleFactor(context))
+        return (dp * getPixelScaleFactor(context)).roundToInt()
     }
 
     fun pxToDp(context: Context, px: Int): Int {
-        return Math.round(px / getPixelScaleFactor(context))
+        return (px / getPixelScaleFactor(context)).roundToInt()
     }
 
     private fun getPixelScaleFactor(context: Context): Float {

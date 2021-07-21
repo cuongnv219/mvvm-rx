@@ -6,7 +6,7 @@ import com.utils.SchedulerProvider
 
 abstract class BaseAppViewModel(
         val dataManager: DataManager,
-        schedulerProvider: SchedulerProvider,
-) : BaseViewModel(schedulerProvider) {
+         val schedulerProvider: SchedulerProvider,
+) : BaseViewModel() {
 
 }

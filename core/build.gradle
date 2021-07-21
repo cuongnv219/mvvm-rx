@@ -1,3 +1,4 @@
+apply from: 'dependencies.gradle'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -36,21 +37,21 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    api 'com.google.code.gson:gson:2.8.7'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    api "io.reactivex.rxjava3:rxkotlin:3.0.1"
-    api "io.reactivex.rxjava3:rxandroid:3.0.0"
-    api 'com.intuit.ssp:ssp-android:1.0.6'
-    api 'com.intuit.sdp:sdp-android:1.0.6'
-    api 'org.greenrobot:eventbus:3.2.0'
-    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.2.0'
-    api 'com.facebook.stetho:stetho-okhttp3:1.6.0'
-    api 'com.karumi:dexter:6.2.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$vlifecycle_viewmodel_ktx"
+    api "androidx.appcompat:appcompat:$vappcompat"
+    api "com.google.android.material:material:$vmaterial"
+    api "androidx.legacy:legacy-support-v4:$vlegacy_support_v4"
+    api "com.google.code.gson:gson:$vgson"
+    api "androidx.recyclerview:recyclerview:$vrecyclerview"
+    api "androidx.lifecycle:lifecycle-extensions:$vlifecycle_extensions"
+    api "io.reactivex.rxjava3:rxkotlin:$vrxkotlin"
+    api "io.reactivex.rxjava3:rxandroid:$vrxandroid"
+    api "com.intuit.ssp:ssp-android:$vssp_android"
+    api "com.intuit.sdp:sdp-android:$vsdp_android"
+    api "org.greenrobot:eventbus:$veventbus"
+    api "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$vrxbinding_appcompat_v7"
+    api "com.facebook.stetho:stetho-okhttp3:$vstetho_okhttp3"
 }
 
 tasks.withType(Javadoc).all {

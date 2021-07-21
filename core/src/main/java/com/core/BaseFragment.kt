@@ -6,7 +6,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.utils.DisposeBag
 import com.widget.Boast
 import io.reactivex.rxjava3.disposables.Disposable
@@ -23,7 +22,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
     abstract fun getLayoutId(): Int
 
     override fun onGlobalLayout() {
-        rootView!!.viewTreeObserver.removeOnGlobalLayoutListener(this)
+        rootView?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
         } else {
             try {
                 binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-                rootView = binding!!.root
+                rootView = binding.root
                 rootView!!.viewTreeObserver.addOnGlobalLayoutListener(this)
 //                updateUI(savedInstanceState)
             } catch (e: InflateException) {
@@ -56,10 +55,9 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        hideKeyboardOutSideText(view)
         view.isClickable = true
         view.isFocusable = true
-        binding?.apply {
+        binding.apply {
             lifecycleOwner = viewLifecycleOwner
         }
     }
@@ -67,37 +65,6 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
     override fun onDestroy() {
         bag.dispose()
         super.onDestroy()
-    }
-
-    fun <VH : RecyclerView.ViewHolder> setUpRcv(rcv: RecyclerView, adapter: RecyclerView.Adapter<VH>) {
-        rcv.setHasFixedSize(true)
-        rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-        rcv.adapter = adapter
-    }
-
-    fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView,
-            adapter:
-            RecyclerView.Adapter<VH>,
-            isHasFixedSize: Boolean,
-            isNestedScrollingEnabled: Boolean,
-    ) {
-        rcv.setHasFixedSize(isHasFixedSize)
-        rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-        rcv.adapter = adapter
-        rcv.isNestedScrollingEnabled = isNestedScrollingEnabled
-    }
-
-    fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView,
-            adapter:
-            RecyclerView.Adapter<VH>,
-            isNestedScrollingEnabled: Boolean,
-    ) {
-        rcv.setHasFixedSize(true)
-        rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-        rcv.adapter = adapter
-        rcv.isNestedScrollingEnabled = isNestedScrollingEnabled
     }
 
     @Throws

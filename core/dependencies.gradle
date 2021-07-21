@@ -1,0 +1,25 @@
+buildscript {
+    ext {
+        kotlin_version              = "1.5.0"
+        android_version             = "30.0.0"
+        compile_version             = 30
+        target_version              = 30
+        min_sdk_version             = 21
+
+        //version
+        vlifecycle_viewmodel_ktx     = "2.3.1"
+        vappcompat                   = "1.3.0"
+        vmaterial                    = "1.4.0"
+        vlegacy_support_v4           = "1.0.0"
+        vgson                        = "2.8.7"
+        vrecyclerview                = "1.2.1"
+        vlifecycle_extensions        = "2.2.0"
+        vrxkotlin                    = "3.0.1"
+        vrxandroid                   = "3.0.0"
+        vssp_android                 = "1.0.6"
+        vsdp_android                 = "1.0.6"
+        veventbus                    = "3.2.0"
+        vrxbinding_appcompat_v7      = "2.2.0"
+        vstetho_okhttp3              = "1.6.0"
+    }
+}
