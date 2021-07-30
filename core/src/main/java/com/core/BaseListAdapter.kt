@@ -32,6 +32,10 @@ abstract class BaseListAdapter<Item : Any, ViewBinding : ViewDataBinding>(
         super.submitList(ArrayList<Item>(list ?: listOf()))
     }
 
+    fun submitDataRef(list: List<Item>?) {
+        super.submitList(list)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewBinding> {
         return BaseViewHolder(DataBindingUtil.inflate<ViewBinding>(
                 LayoutInflater.from(parent.context),
