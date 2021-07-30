@@ -59,12 +59,14 @@ object LogUtil {
         }
     }
 
+    @JvmStatic
     fun error(tag: String, msg: String) {
         if (isDebug) {
             Log.e(tag, msg)
         }
     }
 
+    @JvmStatic
     fun error(msg: String) {
         if (isDebug) {
             Log.e(tag, msg)
