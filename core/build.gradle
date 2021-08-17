@@ -52,6 +52,8 @@ dependencies {
     api "org.greenrobot:eventbus:$veventbus"
     api "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$vrxbinding_appcompat_v7"
     api "com.facebook.stetho:stetho-okhttp3:$vstetho_okhttp3"
+    api "androidx.constraintlayout:constraintlayout:$vconstraint"
+    api "androidx.core:core-ktx:$vcore_ktx"
 }
 
 tasks.withType(Javadoc).all {
