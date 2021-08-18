@@ -6,4 +6,5 @@
   <declare-styleable name="RoundRectCornerImageView">
     <attr name="radiusRound" format="float"/>
   </declare-styleable>
+  <item name="container_main" type="id" />
 </resources>

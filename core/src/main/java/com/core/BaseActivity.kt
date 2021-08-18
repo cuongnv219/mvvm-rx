@@ -81,8 +81,8 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
 
     @Throws
     open fun openFragment(
-            resId: Int, fragmentClazz: Class<*>, args: Bundle?, addBackStack: Boolean,
-            vararg aniInt: Int,
+        resId: Int, fragmentClazz: Class<*>, args: Bundle?, addBackStack: Boolean,
+        vararg aniInt: Int,
     ) {
         val tag = fragmentClazz.simpleName
         try {
@@ -96,6 +96,116 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
                     transaction.setCustomAnimations(aniInt[0], aniInt[1], aniInt[2], aniInt[3])
 
                     transaction.add(resId, fragment, tag)
+
+                    if (addBackStack) {
+                        transaction.addToBackStack(tag)
+                    }
+                    transaction.commitAllowingStateLoss()
+
+                } catch (e: InstantiationException) {
+                    e.printStackTrace()
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun addFragment(fragmentClazz: Class<*>, args: Bundle? = null, addBackStack: Boolean = true, resId: Int = R.id.container_main) {
+        val tag = fragmentClazz.canonicalName ?: fragmentClazz.simpleName
+        try {
+            val isExisted = supportFragmentManager.popBackStackImmediate(tag, 0)
+            if (!isExisted) {
+                val fragment: Fragment
+                try {
+                    fragment = (fragmentClazz.asSubclass(Fragment::class.java)).newInstance().apply { arguments = args }
+
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.add(resId, fragment, tag)
+
+                    if (addBackStack) {
+                        transaction.addToBackStack(tag)
+                    }
+                    transaction.commitAllowingStateLoss()
+
+                } catch (e: InstantiationException) {
+                    e.printStackTrace()
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun addFragment(fragment: Fragment, args: Bundle? = null, addBackStack: Boolean = true, resId: Int = R.id.container_main) {
+        val tag = fragment::class.java.canonicalName ?: fragment::class.java.simpleName
+        try {
+            val isExisted = supportFragmentManager.popBackStackImmediate(tag, 0)
+            if (!isExisted) {
+                try {
+                    fragment.apply { arguments = args }
+
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.add(resId, fragment, tag)
+
+                    if (addBackStack) {
+                        transaction.addToBackStack(tag)
+                    }
+                    transaction.commitAllowingStateLoss()
+
+                } catch (e: InstantiationException) {
+                    e.printStackTrace()
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun replaceFragment(fragmentClazz: Class<*>, args: Bundle? = null, addBackStack: Boolean = true, resId: Int = R.id.container_main) {
+        val tag = fragmentClazz.canonicalName ?: fragmentClazz.simpleName
+        try {
+            val isExisted = supportFragmentManager.popBackStackImmediate(tag, 0)
+            if (!isExisted) {
+                val fragment: Fragment
+                try {
+                    fragment = (fragmentClazz.asSubclass(Fragment::class.java)).newInstance().apply { arguments = args }
+
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.replace(resId, fragment, tag)
+
+                    if (addBackStack) {
+                        transaction.addToBackStack(tag)
+                    }
+                    transaction.commitAllowingStateLoss()
+
+                } catch (e: InstantiationException) {
+                    e.printStackTrace()
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun replaceFragment(fragment: Fragment, args: Bundle? = null, addBackStack: Boolean = true, resId: Int = R.id.container_main) {
+        val tag = fragment::class.java.canonicalName ?: fragment::class.java.simpleName
+        try {
+            val isExisted = supportFragmentManager.popBackStackImmediate(tag, 0)
+            if (!isExisted) {
+                try {
+                    fragment.apply { arguments = args }
+
+                    val transaction = supportFragmentManager.beginTransaction()
+                    transaction.replace(resId, fragment, tag)
 
                     if (addBackStack) {
                         transaction.addToBackStack(tag)
@@ -232,11 +342,11 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
     }
 
     fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView,
-            adapter:
-            RecyclerView.Adapter<VH>,
-            isHasFixedSize: Boolean,
-            isNestedScrollingEnabled: Boolean,
+        rcv: RecyclerView,
+        adapter:
+        RecyclerView.Adapter<VH>,
+        isHasFixedSize: Boolean,
+        isNestedScrollingEnabled: Boolean,
     ) {
         rcv.setHasFixedSize(isHasFixedSize)
         rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
@@ -245,10 +355,10 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
     }
 
     fun <VH : RecyclerView.ViewHolder> setUpRcv(
-            rcv: RecyclerView,
-            adapter:
-            RecyclerView.Adapter<VH>,
-            isNestedScrollingEnabled: Boolean,
+        rcv: RecyclerView,
+        adapter:
+        RecyclerView.Adapter<VH>,
+        isNestedScrollingEnabled: Boolean,
     ) {
         rcv.setHasFixedSize(true)
         rcv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)

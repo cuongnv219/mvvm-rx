@@ -69,10 +69,10 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
 
     @Throws
     open fun openFragment(
-            resId: Int,
-            fragmentClazz: Class<*>,
-            args: Bundle?,
-            addBackStack: Boolean,
+        resId: Int,
+        fragmentClazz: Class<*>,
+        args: Bundle?,
+        addBackStack: Boolean,
     ) {
         val tag = fragmentClazz.simpleName
         try {
@@ -105,8 +105,8 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
 
     @Throws
     open fun openFragment(
-            resId: Int, fragmentClazz: Class<*>, args: Bundle?, addBackStack: Boolean,
-            vararg aniInt: Int,
+        resId: Int, fragmentClazz: Class<*>, args: Bundle?, addBackStack: Boolean,
+        vararg aniInt: Int,
     ) {
         val tag = fragmentClazz.simpleName
         try {
@@ -132,6 +132,116 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
                     e.printStackTrace()
                 }
 
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun replaceFragment(fragmentClazz: Class<*>, args: Bundle? = null, addBackStack: Boolean = true, resId: Int = R.id.container_main) {
+        val tag = fragmentClazz.canonicalName ?: fragmentClazz.simpleName
+        try {
+            val isExisted = activity?.supportFragmentManager?.popBackStackImmediate(tag, 0) ?: return
+            if (!isExisted) {
+                val fragment: Fragment
+                try {
+                    fragment = (fragmentClazz.asSubclass(Fragment::class.java)).newInstance().apply { arguments = args }
+
+                    val transaction = activity?.supportFragmentManager?.beginTransaction() ?: return
+                    transaction.replace(resId, fragment, tag)
+
+                    if (addBackStack) {
+                        transaction.addToBackStack(tag)
+                    }
+                    transaction.commitAllowingStateLoss()
+
+                } catch (e: java.lang.InstantiationException) {
+                    e.printStackTrace()
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun addFragment(fragmentClazz: Class<*>, args: Bundle? = null, addBackStack: Boolean = true, resId: Int = R.id.container_main) {
+        val tag = fragmentClazz.canonicalName ?: fragmentClazz.simpleName
+        try {
+            val isExisted = activity?.supportFragmentManager?.popBackStackImmediate(tag, 0) ?: return
+            if (!isExisted) {
+                val fragment: Fragment
+                try {
+                    fragment = (fragmentClazz.asSubclass(Fragment::class.java)).newInstance().apply { arguments = args }
+
+                    val transaction = activity?.supportFragmentManager?.beginTransaction() ?: return
+                    transaction.add(resId, fragment, tag)
+
+                    if (addBackStack) {
+                        transaction.addToBackStack(tag)
+                    }
+                    transaction.commitAllowingStateLoss()
+
+                } catch (e: java.lang.InstantiationException) {
+                    e.printStackTrace()
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun addFragment(fragment: Fragment, args: Bundle? = null, addBackStack: Boolean = true, resId: Int = R.id.container_main) {
+        val tag = fragment::class.java.canonicalName ?: fragment::class.java.simpleName
+        try {
+            val isExisted = activity?.supportFragmentManager?.popBackStackImmediate(tag, 0) ?: return
+            if (!isExisted) {
+                try {
+                    fragment.apply { arguments = args }
+
+                    val transaction = activity?.supportFragmentManager?.beginTransaction() ?: return
+                    transaction.add(resId, fragment, tag)
+
+                    if (addBackStack) {
+                        transaction.addToBackStack(tag)
+                    }
+                    transaction.commitAllowingStateLoss()
+
+                } catch (e: java.lang.InstantiationException) {
+                    e.printStackTrace()
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun replaceFragment(fragment: Fragment, args: Bundle? = null, addBackStack: Boolean = true, resId: Int = R.id.container_main) {
+        val tag = fragment::class.java.canonicalName ?: fragment::class.java.simpleName
+        try {
+            val isExisted = activity?.supportFragmentManager?.popBackStackImmediate(tag, 0) ?: return
+            if (!isExisted) {
+                try {
+                    fragment.apply { arguments = args }
+
+                    val transaction = activity?.supportFragmentManager?.beginTransaction() ?: return
+                    transaction.replace(resId, fragment, tag)
+
+                    if (addBackStack) {
+                        transaction.addToBackStack(tag)
+                    }
+                    transaction.commitAllowingStateLoss()
+
+                } catch (e: java.lang.InstantiationException) {
+                    e.printStackTrace()
+                } catch (e: IllegalAccessException) {
+                    e.printStackTrace()
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
