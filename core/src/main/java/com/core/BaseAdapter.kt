@@ -1,6 +1,7 @@
 package com.core
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -49,4 +50,12 @@ abstract class BaseAdapter<Item : Any, ViewBinding : ViewDataBinding>(
 
         holder.binding.executePendingBindings()
     }
+}
+
+open class BaseViewHolder<ViewBinding : ViewDataBinding>(
+        val binding: ViewBinding,
+) : RecyclerView.ViewHolder(binding.root)
+
+interface OnItemClickListener<M> {
+    fun onItemClick(view: View?, position: Int, item: M)
 }

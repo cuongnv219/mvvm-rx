@@ -1,7 +1,7 @@
 buildscript {
     ext.kotlin_version = '1.5.20'
     ext.android_version = "30.0.0"
-    ext.compile_version = 29
+    ext.compile_version = 30
     ext.target_version = 30
     ext.min_sdk_version = 23
     ext.koin_version = "2.1.6"
