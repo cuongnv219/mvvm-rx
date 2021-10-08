@@ -1,5 +1,7 @@
 package com.katana.koin.di
 
+import android.content.Context
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.katana.koin.data.AppDataManager
 import com.katana.koin.data.DataManager
@@ -7,36 +9,35 @@ import com.katana.koin.data.local.prefs.AppPrefsHelper
 import com.katana.koin.data.local.prefs.PrefsHelper
 import com.katana.koin.data.remote.ApiHelper
 import com.katana.koin.data.remote.AppApiHelper
-import com.katana.koin.ui.MainViewModel
-import com.katana.koin.ui.other.OtherHihi
 import com.utils.SchedulerProvider
-import org.koin.android.viewmodel.dsl.viewModel
-import org.koin.core.module.Module
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-//define app module gson, data manager, etc...
-val appModule: Module = module {
+@InstallIn(SingletonComponent::class)
+@Module
+class AppModule {
 
-    single { SchedulerProvider() }
+    @Singleton
+    @Provides
+    fun provideSchedulerProvider() = SchedulerProvider()
 
-    single { AppPrefsHelper(get(), "Katana", get()) as PrefsHelper }
+    @Singleton
+    @Provides
+    fun provideAppApiHelper(): ApiHelper = AppApiHelper()
 
-    single { AppApiHelper() as ApiHelper }
+    @Singleton
+    @Provides
+    fun provideAppPrefsHelper(@ApplicationContext context: Context, gson: Gson): PrefsHelper = AppPrefsHelper(context, "kaz", gson)
 
-    single { AppDataManager(get(), get()) as DataManager }
+    @Singleton
+    @Provides
+    fun provideGson(): Gson = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
 
-    single { GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()!! }
-
-    factory { OtherHihi(get(), get()) }
+    @Singleton
+    @Provides
+    fun provideAppDataManager(prefsHelper: PrefsHelper, apiHelper: ApiHelper): DataManager = AppDataManager(prefsHelper, apiHelper)
 }
-
-//define list view model
-val viewModule = module {
-    viewModel { MainViewModel(get(), get()) }
-}
-
-val otherModule = module {
-    //    provide { OtherHihi() }
-}
-
-val mvvmModule = listOf(appModule, viewModule)

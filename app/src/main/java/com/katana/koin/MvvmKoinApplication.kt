@@ -1,32 +1,22 @@
 package com.katana.koin
 
 import android.app.Application
-import com.katana.koin.di.mvvmModule
 import com.utils.LogUtil
+import dagger.hilt.android.HiltAndroidApp
 import okhttp3.CipherSuite
 import okhttp3.ConnectionSpec
 import okhttp3.OkHttpClient
 import okhttp3.TlsVersion
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
-import org.koin.core.logger.EmptyLogger
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-/**
- * Created by Kaz on 10:28 2018-12-19
- */
+@HiltAndroidApp
 class MvvmKoinApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
         LogUtil.init(true)
-        startKoin {
-            androidContext(this@MvvmKoinApplication)
-            modules(mvvmModule)
-            logger(EmptyLogger())
-        }
         initFastNetworking()
     }
 

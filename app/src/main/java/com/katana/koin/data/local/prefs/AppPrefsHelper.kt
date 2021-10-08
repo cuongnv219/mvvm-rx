@@ -4,9 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 
-/**
- * Created by Kaz on 10:38 2018-12-19
- */
 class AppPrefsHelper constructor(context: Context, prefsName: String, private val gson: Gson) : PrefsHelper {
 
     companion object {

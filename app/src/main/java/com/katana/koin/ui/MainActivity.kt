@@ -1,13 +1,15 @@
 package com.katana.koin.ui
 
+import androidx.activity.viewModels
 import com.core.BaseActivity
 import com.katana.koin.R
 import com.katana.koin.databinding.ActivityMainBinding
-import org.koin.android.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private val mainViewModel by viewModel<MainViewModel>()
+    private val mainViewModel by viewModels<MainViewModel>()
 
     override fun getLayoutId(): Int = R.layout.activity_main
 

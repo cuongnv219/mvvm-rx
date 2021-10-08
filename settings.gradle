@@ -1,3 +1,2 @@
-include ':app', ':core', ':sample'
+include ':app', ':core'
 rootProject.name='mvvm-rx'
-
