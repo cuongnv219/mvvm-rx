@@ -1,11 +1,3 @@
-/*
- * Copyright (c) Facebook, Inc. and its affiliates.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 package com.widget.shimmer;
 
 import android.animation.ValueAnimator;
@@ -27,13 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public final class ShimmerDrawable extends Drawable {
-    private final ValueAnimator.AnimatorUpdateListener mUpdateListener =
-            new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    invalidateSelf();
-                }
-            };
+    private final ValueAnimator.AnimatorUpdateListener mUpdateListener = animation -> invalidateSelf();
 
     private final Paint mShimmerPaint = new Paint();
     private final Rect mDrawRect = new Rect();

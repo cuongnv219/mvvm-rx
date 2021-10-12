@@ -1,9 +1,9 @@
-# Mvvm-architecture-koin with rx
+# Mvvm-architecture-Hilt with rx
 
 [![](https://jitpack.io/v/cuongnv219/mvvm-rx.svg)](https://jitpack.io/#cuongnv219/mvvm-rx) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ac00a2f8cfe941bba44327f998bb6a29)](https://www.codacy.com/manual/cuongnv219/mvvm-rx?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cuongnv219/mvvm-rx&amp;utm_campaign=Badge_Grade)
 
 Sample base mvvm with rx
-This repository contains a detailed sample app that implements MVVM architecture using Koin, Room, RxJava, FastAndroidNetworking...
+This repository contains a detailed sample app that implements MVVM architecture using Hilt, Room, RxJava, FastAndroidNetworking...
 
 ### Requirements
 * SDK 16 and and higher

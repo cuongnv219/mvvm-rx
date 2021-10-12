@@ -25,9 +25,6 @@ object StringUtils {
 
     private fun checkEmpty(string: String?) = string == null || string.isEmpty()
 
-    @JvmStatic
-    fun isEmpty(string: String?) = string == null || string.isEmpty()
-
     fun isValidEmail(email: String) = Pattern.compile(EMAIL_REGEX).matcher(email).matches()
 
     fun isValidPhoneNumber(phoneNumber: String) = !isExistNull(phoneNumber)

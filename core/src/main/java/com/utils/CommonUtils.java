@@ -3,7 +3,6 @@ package com.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.os.Build;
 import android.provider.Settings;
 
 import java.io.IOException;
@@ -27,11 +26,6 @@ public final class CommonUtils {
         byte[] buffer = new byte[size];
         int in = inputStream.read(buffer);
         inputStream.close();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            return new String(buffer, StandardCharsets.UTF_8);
-        } else {
-            return new String(buffer, StandardCharsets.UTF_8);
-        }
+        return new String(buffer, StandardCharsets.UTF_8);
     }
 }

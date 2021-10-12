@@ -4,7 +4,7 @@ buildscript {
     ext.compile_version = 30
     ext.target_version = 30
     ext.min_sdk_version = 21
-    ext.hiltVersion = '2.38.1'
+    ext.hiltVersion = '2.39.1'
 
     repositories {
         google()
