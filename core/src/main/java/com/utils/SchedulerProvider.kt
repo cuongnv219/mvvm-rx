@@ -6,16 +6,16 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class SchedulerProvider {
 
-    fun <T> ioToMainObservableScheduler(): ObservableTransformer<T, T> = ObservableTransformer { upstream ->
+    fun <T: Any> ioToMainObservableScheduler(): ObservableTransformer<T, T> = ObservableTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
     }
 
-    fun <T> ioToMainSingleScheduler(): SingleTransformer<T, T> = SingleTransformer { upstream ->
+    fun <T : Any> ioToMainSingleScheduler(): SingleTransformer<T, T> = SingleTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
     }
-    fun <T> ioToIOSingleScheduler(): SingleTransformer<T, T> = SingleTransformer { upstream ->
+    fun <T: Any> ioToIOSingleScheduler(): SingleTransformer<T, T> = SingleTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getIOThreadScheduler())
     }
@@ -25,12 +25,12 @@ class SchedulerProvider {
                 .observeOn(getMainThreadScheduler())
     }
 
-    fun <T> ioToMainFlowableScheduler(): FlowableTransformer<T, T> = FlowableTransformer { upstream ->
+    fun <T: Any> ioToMainFlowableScheduler(): FlowableTransformer<T, T> = FlowableTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
     }
 
-    fun <T> ioToMainMaybeScheduler(): MaybeTransformer<T, T> = MaybeTransformer { upstream ->
+    fun <T: Any> ioToMainMaybeScheduler(): MaybeTransformer<T, T> = MaybeTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
     }

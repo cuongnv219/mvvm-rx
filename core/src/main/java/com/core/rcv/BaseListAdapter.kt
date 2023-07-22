@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.core.KzListener
 import com.core.anotation.ItemType
 import java.util.concurrent.Executors
 
@@ -41,6 +42,8 @@ abstract class BaseListAdapter<Item : Any, ViewBinding : ViewDataBinding>(
                 .setBackgroundThreadExecutor(Executors.newSingleThreadExecutor())
                 .build()
 ), BaseRecyclerAdapter<Item, ViewBinding> {
+
+    var onItemListener: KzListener? = null
 
     protected fun initShimmer() {
         val shimmers = mutableListOf<Item>()
@@ -76,14 +79,19 @@ abstract class BaseListAdapter<Item : Any, ViewBinding : ViewDataBinding>(
 
     override fun getItemViewType(position: Int): Int {
         val item = currentList.getOrNull(position)
-        return if (item is Header) {
-            ItemType.HEADER
-        } else if (item is Shimmer) {
-            ItemType.SHIMMER
-        } else if (item is Footer || position == itemCount - 1) {
-            ItemType.FOOTER
-        } else {
-            ItemType.NORMAL
+        return when (item) {
+            is Header -> {
+                ItemType.HEADER
+            }
+            is Shimmer -> {
+                ItemType.SHIMMER
+            }
+            is Footer -> {
+                ItemType.FOOTER
+            }
+            else -> {
+                ItemType.NORMAL
+            }
         }
     }
 
@@ -99,7 +107,7 @@ abstract class BaseListAdapter<Item : Any, ViewBinding : ViewDataBinding>(
                 getLayoutFooter()
             }
             else -> {
-                getLayoutRes()
+                if (getLayoutRes() == 0) getLayoutRes(viewType) else getLayoutRes()
             }
         }
         return BaseListViewHolder(DataBindingUtil.inflate<ViewBinding>(
@@ -112,6 +120,8 @@ abstract class BaseListAdapter<Item : Any, ViewBinding : ViewDataBinding>(
     }
 
     override fun onBindViewHolder(holder: BaseListViewHolder<ViewBinding>, position: Int) {
+        holder.binding.root.setOnClickListener { onItemListener?.onKzListener() }
+
         when (getItemViewType(position)) {
             ItemType.FOOTER -> {
                 bindFooter(holder.binding)

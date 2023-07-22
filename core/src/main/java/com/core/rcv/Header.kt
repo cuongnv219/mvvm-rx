@@ -1,4 +1,4 @@
 package com.core.rcv
 
-class Header : Model() {
+open class Header : Model() {
 }

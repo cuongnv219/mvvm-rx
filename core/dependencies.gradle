@@ -1,29 +1,9 @@
 buildscript {
     ext {
-        kotlin_version              = "1.5.31"
-        android_version             = "30.0.0"
-        compile_version             = 30
-        target_version              = 30
+        kotlin_version              = '1.8.22'
+        android_version             = "33.0.0"
+        compile_version             = 33
+        target_version              = 33
         min_sdk_version             = 21
-
-        //version
-        vlifecycle_viewmodel_ktx     = "2.3.1"
-        vappcompat                   = "1.3.1"
-        vmaterial                    = "1.4.0"
-        vlegacy_support_v4           = "1.0.0"
-        vgson                        = "2.8.8"
-        vrecyclerview                = "1.2.1"
-        vlifecycle_extensions        = "2.2.0"
-        vrxkotlin                    = "3.0.1"
-        vrxandroid                   = "3.0.0"
-        vssp_android                 = "1.0.6"
-        vsdp_android                 = "1.0.6"
-        veventbus                    = "3.2.0"
-        vrxbinding_appcompat_v7      = "2.2.0"
-        vstetho_okhttp3              = "1.6.0"
-        vconstraint                  = '2.1.1'
-        vcore_ktx                    = "1.6.0"
-        vactivity                    = "1.3.1"
-        vfragment                    = "1.3.6"
     }
 }

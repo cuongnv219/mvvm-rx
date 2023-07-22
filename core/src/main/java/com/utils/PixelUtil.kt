@@ -6,6 +6,7 @@ import kotlin.math.roundToInt
 
 object PixelUtil {
 
+    @JvmStatic
     fun dpToPx(context: Context, dp: Int): Int {
         return (dp * getPixelScaleFactor(context)).roundToInt()
     }

@@ -1,4 +1,4 @@
 package com.core.rcv
 
-class Footer : Model() {
+open class Footer : Model() {
 }

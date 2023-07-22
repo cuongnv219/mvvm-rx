@@ -1,7 +1,10 @@
 package com.core
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -147,7 +150,9 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
             val isExisted = supportFragmentManager.popBackStackImmediate(tag, 0)
             if (!isExisted) {
                 try {
-                    fragment.apply { arguments = args }
+                    args?.let {
+                        fragment.arguments = it
+                    }
 
                     val transaction = supportFragmentManager.beginTransaction()
                     transaction.add(resId, fragment, tag)
@@ -243,6 +248,13 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
         builder.setCancelable(isCancelable)
         builder.setView(if (getLayoutIdLoading() == -1) R.layout.layout_loading_dialog_default else getLayoutIdLoading())
         loading = builder.create()
+        loading.apply {
+            window?.let {
+                it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                it.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            }
+        }
     }
 
     /**

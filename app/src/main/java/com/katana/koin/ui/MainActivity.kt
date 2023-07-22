@@ -9,14 +9,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private val mainViewModel by viewModels<MainViewModel>()
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
     private fun getUser() {
-        addDispose(
-                mainViewModel.getUserGithub()
-        )
 //        mainViewModel.getUserGithub().disposedBy(bag)
     }
 }

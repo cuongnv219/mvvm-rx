@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.utils.DisposeBag
+import com.utils.ext.observe
 import com.widget.Boast
 import io.reactivex.rxjava3.disposables.Disposable
 
@@ -69,10 +70,10 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
 
     @Throws
     open fun openFragment(
-        resId: Int,
-        fragmentClazz: Class<*>,
-        args: Bundle?,
-        addBackStack: Boolean,
+            resId: Int,
+            fragmentClazz: Class<*>,
+            args: Bundle?,
+            addBackStack: Boolean,
     ) {
         val tag = fragmentClazz.simpleName
         try {
@@ -105,8 +106,8 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
 
     @Throws
     open fun openFragment(
-        resId: Int, fragmentClazz: Class<*>, args: Bundle?, addBackStack: Boolean,
-        vararg aniInt: Int,
+            resId: Int, fragmentClazz: Class<*>, args: Bundle?, addBackStack: Boolean,
+            vararg aniInt: Int,
     ) {
         val tag = fragmentClazz.simpleName
         try {
@@ -249,14 +250,18 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
     }
 
     fun toast(msg: String) {
-        context?.let {
-            Boast.makeText(it, msg).show()
+        activity?.runOnUiThread {
+            context?.let {
+                Boast.makeText(it, msg).show()
+            }
         }
     }
 
     fun toast(msg: String, duration: Int, cancelCurrent: Boolean) {
-        context?.let {
-            Boast.makeText(it, msg, duration).show(cancelCurrent)
+        activity?.runOnUiThread {
+            context?.let {
+                Boast.makeText(it, msg, duration).show(cancelCurrent)
+            }
         }
     }
 
@@ -316,6 +321,15 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment(), ViewTreeObserver.
         activity?.finish()
     }
 
+    protected fun <VM : BaseViewModel> observeLoading(viewModel: VM) {
+        observe(viewModel.isLoading, {
+            if (it == true) {
+                showDialog()
+            } else {
+                hideDialog()
+            }
+        })
+    }
 //    fun Subject<String>.receiveTextChangesFrom(editText: EditText) {
 //        RxTextView.textChanges(editText)
 //                .subscribe { newText -> this.onNext(newText.toString()) }
